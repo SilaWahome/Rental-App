@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Rental Suggestions</h1>
+    <p>Your net income after tax and SHIF is: KES {{ net_income }}</p>
+    {% if suggestions is not none %}
+    <table>
+        <tr>
+            <th>Agency</th>
+            <th>Neighborhood</th>
+            <th>Price (KES)</th>
+            <th>Bedrooms</th>
+        </tr>
+        {% for index, row in suggestions.iterrows() %}
+        <tr>
+            <td>{{ row['Agency'] }}</td>
+            <td>{{ row['Neighborhood'] }}</td>
+            <td>{{ row['Price'] }}</td>
+            <td>{{ row['Bedrooms'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No listings available based on your income and preferences.</p>
+    {% endif %}
+</body>
+</html>
